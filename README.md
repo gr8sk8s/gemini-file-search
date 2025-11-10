@@ -1,2 +1,205 @@
-# gemini-file-search
-Development using the newly announced File Search Tool via Google's Gemini
+# Gemini File Search
+
+An intelligent document search and chat application powered by Google's Gemini AI. Upload your PDF and text documents, and ask questions about them using natural language. The application uses Gemini's File Search Tool to automatically index your documents and provide accurate, citation-backed answers.
+
+## What is This?
+
+**For Everyone:**
+Imagine having a smart assistant that can read all your PDFs and text files, understand what's in them, and answer any questions you have. That's what Gemini File Search does! You simply upload your documents (like research papers, reports, or notes), and then you can chat with an AI that has "read" all your files and can find the exact information you need.
+
+**For Developers:**
+This is a Streamlit-based web application that leverages Google's Gemini File Search API to:
+- Upload and index PDF/TXT documents into a Gemini File Search Store
+- Enable natural language queries against the indexed documents
+- Provide answers with source citations from the original documents
+- Manage document collections through a user-friendly web interface
+
+## Features
+
+- 📄 **Document Upload**: Upload multiple PDF or TXT files at once
+- 🔍 **Intelligent Search**: Ask questions in natural language about your documents
+- 📚 **Citation Support**: Answers include citations pointing back to source documents
+- 🎨 **Streamlit GUI**: Beautiful, intuitive web interface that runs in your browser
+- ⚡ **Real-time Status**: See upload and indexing progress with periodic status updates
+- 🔄 **Duplicate Detection**: Automatically skips files that already exist in the store
+- 🗑️ **Store Management**: Clear your document store with a single click
+
+## Prerequisites
+
+- Python 3.11 or higher
+- Package manager (choose one):
+  - [uv](https://github.com/astral-sh/uv) - A fast Python package installer and resolver (recommended)
+  - `pip` and `venv` - Standard Python package management (built into Python)
+- A Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
+
+## Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd gemini-file-search
+```
+
+### 2. Create Virtual Environment and Install Dependencies
+
+Choose one of the following methods:
+
+#### Option A: Using `uv` (Recommended - Faster)
+
+```bash
+uv venv --python 3.11  #... or whatever version of python you prefer
+source .venv/bin/activate #... to activate the virtual env
+uv pip install -r requirements.txt # ... install required libs
+```
+
+#### Option B: Using `pip` and `venv` (Traditional Method)
+
+**macOS/Linux:**
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+**Windows:**
+```cmd
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**Note:**
+- On macOS/Linux, if `python3.11` is not available, try `python3` or `python`
+- After activation, your terminal prompt should show `(.venv)` indicating the virtual environment is active
+- To deactivate the virtual environment later, simply run `deactivate`
+
+### 3. Configure Environment Variables
+
+Copy the example environment file and add your API key:
+
+```bash
+cp env.example .env
+```
+
+Edit `.env` and add your Gemini API key:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+Optional configuration:
+- `USE_MODEL`: Gemini model to use (default: `gemini-2.5-flash`)
+- `FILE_SEARCH_STORE`: Display name for the file search store (default: `demo_filesearch_store`)
+
+### 4. Run the Application
+
+```bash
+streamlit run code/app.py
+```
+
+The application will open in your default web browser at `http://localhost:8501`.
+
+## Usage
+
+### Uploading Documents
+
+1. In the sidebar, click "Browse files" under "Upload documents"
+2. Select one or more PDF or TXT files
+3. Click "Upload & index" to upload and index your documents
+4. Wait for the indexing to complete (you'll see status updates every 10 seconds)
+
+**Note:** Large documents may take several minutes to index. The application will show periodic status updates during this process.
+
+### Asking Questions
+
+1. Once documents are uploaded and indexed, the chat interface becomes enabled
+2. Type your question in the chat input at the bottom of the page
+3. The AI will search through your documents and provide an answer with citations
+
+**Example Questions:**
+- "What are the main findings in the research paper?"
+- "Summarize the key points from all documents"
+- "What does the document say about [specific topic]?"
+
+### Managing Documents
+
+- **View Store Contents**: The sidebar shows all documents in your store with their status (✅ Active or ⏳ Processing)
+- **Clear Store**: Click "Clear store" in the sidebar to remove all documents from the store
+
+## How It Works
+
+### For Technical Users
+
+1. **File Upload**: Documents are uploaded to Google's Gemini File Search Store via the Gemini API
+2. **Indexing**: Gemini processes and indexes the documents, making them searchable
+3. **Query Processing**: When you ask a question, the application:
+   - Sends your query to the Gemini model
+   - Uses the File Search Tool to search through indexed documents
+   - Returns an answer with citations from the source documents
+4. **Streamlit Interface**: The web UI provides a user-friendly way to interact with the File Search API
+
+### Architecture
+
+- **`code/app.py`**: Streamlit web application with GUI components
+- **`code/file_search_service.py`**: Core service layer for File Search API operations
+  - Document upload and indexing
+  - Store management (create, list, clear)
+  - Document existence checking
+  - Status polling with callbacks
+
+## Project Structure
+
+```
+gemini-file-search/
+├── code/
+│   ├── app.py                 # Streamlit web application
+│   └── file_search_service.py # File Search API service layer
+├── env.example                # Environment variables template
+├── requirements.txt           # Python dependencies
+└── README.md                  # This file
+```
+
+## Dependencies
+
+- `google-genai>=1.49.0` - Google Gemini AI SDK
+- `streamlit>=1.40.0` - Web application framework
+- `python-dotenv>=1.0.0` - Environment variable management
+
+## Troubleshooting
+
+### API Key Issues
+- Make sure your `GEMINI_API_KEY` is set in the `.env` file
+- Verify your API key is valid and has access to the File Search API
+
+### Upload Failures
+- Check that your files are valid PDF or TXT files
+- Ensure files are not corrupted
+- Large files may take longer to process; wait for the indexing to complete
+
+### Model Errors
+- Verify the model name in `USE_MODEL` is valid (e.g., `gemini-2.5-flash` or `gemini-2.5-pro`)
+- Check your API quota and rate limits
+
+## License
+
+See [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! We appreciate your help in making this project better.
+
+### How to Contribute
+
+- 🐛 **Found a bug?** [Open an issue](https://github.com/your-username/gemini-file-search/issues) to report it
+- 💡 **Have a feature idea?** [Open an issue](https://github.com/your-username/gemini-file-search/issues) to suggest it
+- 🔧 **Want to contribute code?** Submit a [Pull Request](https://github.com/your-username/gemini-file-search/pulls)
+
+When reporting bugs or issues, please include:
+- Clear description of the problem
+- Steps to reproduce
+- Expected vs actual behavior
+- Environment information (Python version, OS, etc.)
+- Error messages or screenshots if applicable
+
+Thank you for contributing! 🙏
