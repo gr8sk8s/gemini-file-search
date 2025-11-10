@@ -1,6 +1,8 @@
-# Gemini File Search
+# Gemini File Search - Tutorial & Demo
 
-An intelligent document search and chat application powered by Google's Gemini AI. Upload your PDF and text documents, and ask questions about them using natural language. The application uses Gemini's File Search Tool to automatically index your documents and provide accurate, citation-backed answers.
+A beginner-friendly tutorial and demo application for Google's **newly announced Gemini File Search Tool**. This project provides a complete, working example of how to build an intelligent document search and chat application using Gemini's File Search API. Upload your PDF and text documents, and ask questions about them using natural language. The application demonstrates how the File Search Tool automatically indexes your documents and provides accurate, citation-backed answers.
+
+> **🚀 New Feature Alert!** Google's File Search Tool was just announced recently. This repository serves as a practical tutorial to help developers get started with this powerful new capability.
 
 ## What is This?
 
@@ -8,11 +10,14 @@ An intelligent document search and chat application powered by Google's Gemini A
 Imagine having a smart assistant that can read all your PDFs and text files, understand what's in them, and answer any questions you have. That's what Gemini File Search does! You simply upload your documents (like research papers, reports, or notes), and then you can chat with an AI that has "read" all your files and can find the exact information you need.
 
 **For Developers:**
-This is a Streamlit-based web application that leverages Google's Gemini File Search API to:
-- Upload and index PDF/TXT documents into a Gemini File Search Store
-- Enable natural language queries against the indexed documents
-- Provide answers with source citations from the original documents
-- Manage document collections through a user-friendly web interface
+This repository is a **tutorial and starter project** for learning Google's Gemini File Search Tool. It includes:
+- A complete Streamlit-based web application demonstrating the File Search API
+- Sample code showing how to upload and index PDF/TXT documents into a Gemini File Search Store
+- Implementation of natural language queries against indexed documents
+- Examples of handling citations and source references
+- A user-friendly web interface for managing document collections
+
+Perfect for developers who want to explore this new capability and understand how to integrate it into their own applications!
 
 ## Features
 
@@ -100,6 +105,29 @@ streamlit run code/app.py
 
 The application will open in your default web browser at `http://localhost:8501`.
 
+### 5. (Optional) Download Sample PDF Files for Testing
+
+To help you get started and see the File Search Tool in action, we've provided some sample PDF files you can download. These are optional - you can use your own PDF files for your analysis, but these samples are perfect for beginners who are new to the File Search Tool!
+
+**Download sample PDF files:**
+
+```bash
+# Download IRENA Renewable Energy Highlights 2025
+curl --create-dirs --output-dir ./data -sSO \
+  https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2025/Jul/IRENA_DAT_Renewable_energy_highlights_2025.pdf
+
+# Download IEA Renewables 2024 report
+curl --create-dirs --output-dir ./data -sSO \
+  https://www.developmentaid.org/api/frontend/cms/file/2024/10/Renewables2024.pdf
+```
+
+These sample PDFs are renewable energy reports that work great for testing the File Search Tool. Once downloaded, you can upload them through the Streamlit interface and ask questions like:
+- "What are the key renewable energy trends for 2024?"
+- "What does the report say about solar energy growth?"
+- "Summarize the main findings from both documents"
+
+**Note:** The `data/` directory will be created automatically if it doesn't exist. You can also use your own PDF or TXT files - just upload them through the web interface!
+
 ## Usage
 
 ### Uploading Documents
@@ -121,6 +149,12 @@ The application will open in your default web browser at `http://localhost:8501`
 - "What are the main findings in the research paper?"
 - "Summarize the key points from all documents"
 - "What does the document say about [specific topic]?"
+
+**If you downloaded the sample PDFs, try asking:**
+- "What are the key renewable energy trends mentioned in the reports?"
+- "What does the IRENA report say about solar energy capacity?"
+- "Compare the findings between the two renewable energy reports"
+- "What are the main challenges for renewable energy adoption?"
 
 ### Managing Documents
 
@@ -155,6 +189,7 @@ gemini-file-search/
 ├── code/
 │   ├── app.py                 # Streamlit web application
 │   └── file_search_service.py # File Search API service layer
+├── data/                      # Sample PDF files (optional, created when downloading samples)
 ├── env.example                # Environment variables template
 ├── requirements.txt           # Python dependencies
 └── README.md                  # This file
