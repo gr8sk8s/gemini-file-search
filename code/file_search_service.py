@@ -1,4 +1,6 @@
-"""logic for Gemini File Search service."""
+"""
+logic for Gemini File Search service.
+"""
 
 from __future__ import annotations
 

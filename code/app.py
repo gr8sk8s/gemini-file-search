@@ -1,4 +1,5 @@
-"""Streamlit app for Gemini File Search.
+"""
+Streamlit app for Gemini File Search.
 
 This includes core functionality:
 - Upload and index files (PDF or TXT) with periodic status updates every 10 seconds
